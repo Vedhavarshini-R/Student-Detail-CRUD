@@ -1,0 +1,96 @@
+<div class="container">
+
+  <h2>Student Registration Form</h2>
+
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+
+    <label>Name *</label>
+    <input type="text" formControlName="name">
+
+    <div class="error"
+      *ngIf="studentForm.get('name')?.touched &&
+             studentForm.get('name')?.invalid">
+
+      Name is required
+    </div>
+
+    <label>Email *</label>
+    <input type="email" formControlName="email">
+
+    <div class="error"
+      *ngIf="studentForm.get('email')?.touched &&
+             studentForm.get('email')?.invalid">
+
+      Valid email is required
+    </div>
+
+    <label>Age *</label>
+    <input type="number" formControlName="age">
+
+    <div class="error"
+      *ngIf="studentForm.get('age')?.touched &&
+             studentForm.get('age')?.invalid">
+
+      Age is required
+    </div>
+
+    <label>Department (Optional)</label>
+    <input type="text" formControlName="department">
+
+    <label>Phone (Optional)</label>
+    <input type="text" formControlName="phone">
+
+    <button type="submit">
+      {{ editIndex === null ? 'Save Student' : 'Update Student' }}
+    </button>
+
+    <button type="button" class="cancel-btn" (click)="studentForm.reset()">
+  Cancel
+</button>
+
+  </form>
+
+  <hr>
+
+  <h2>Student List</h2>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Department</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let student of students; let i = index">
+
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.age }}</td>
+        <td>{{ student.department }}</td>
+        <td>{{ student.phone }}</td>
+
+        <td>
+          <button class="edit-btn" (click)="editStudent(i)">
+            Edit
+          </button>
+
+          <button class="delete-btn" (click)="deleteStudent(i)">
+            Delete
+          </button>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
